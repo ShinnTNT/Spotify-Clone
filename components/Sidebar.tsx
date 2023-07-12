@@ -10,6 +10,7 @@ import Box from "./Box";
 import { useMemo } from "react";
 import Library from "./Library";
 import { Song } from "@/types";
+import usePlayer from "@/hooks/usePlayer";
 
 interface SidebarProps {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ children, songs }: SidebarProps) => {
+  const player = usePlayer();
   const pathname = usePathname();
 
   const routes = useMemo(
@@ -43,7 +45,8 @@ const Sidebar = ({ children, songs }: SidebarProps) => {
         `
         flex 
         h-full
-        `
+        `,
+        player.activeId && `h-[calc(100% - 80px)]`
       )}
     >
       <div
